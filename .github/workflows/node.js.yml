@@ -45,7 +45,15 @@ jobs:
           ENV_PATH: ./.env.testing
 
       - name: Code Climate Test Reporter
-        uses: aktions/codeclimate-test-reporter@v1
+      - uses: actions/checkout@master
+      - uses: actions/setup-node@master
         with:
-          codeclimate-test-reporter-id: ${{ secrets.CC_TEST_REPORTER_ID }}
-          command: after-build -t lcov ./coverage/lcov.info
+          node-version: '12'
+      - run: npm install -g yarn
+      - run: yarn install
+      - run: yarn build
+      - uses: paambaati/codeclimate-action@v2.2.4
+        env:
+          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
+        with:
+          coverageCommand: npm test
