@@ -39,14 +39,10 @@ jobs:
       - name: Install dependencies
         run: npm i
 
-      - name: test
-        run: npm test
-        env:
-          ENV_PATH: ./.env.testing
-
       - name: Code Climate Test Reporter
         uses: paambaati/codeclimate-action@v2.7.5
         env:
           CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
+          ENV_PATH: ./.env.testing
         with:
           coverageCommand: npm test
