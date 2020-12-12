@@ -37,11 +37,14 @@ jobs:
       - name: Install dependencies
         run: npm i
 
-      - name: test
-        # Runs a script that creates a PostgreSQL client, populates
-        # the client with data, and retrieves data
-        run: npm test
-        # Environment variable used by the `client.js` script to create a new PostgreSQL client.
+      - name: Test & publish code coverage
+        uses: paambaati/codeclimate-action@v2.7.5
+        env:
+          CC_TEST_REPORTER_ID: 2b97afdf04103afa1788a6ef7cb9b10878c0c14bbf1b278721042eac7e5516fb
+        with:
+          coverageCommand: npm test
+          coverageLocations: |
+            ${{github.workspace}}/*.lcov:lcov
         env:
           # The hostname used to communicate with the PostgreSQL service container
           POSTGRES_HOST: postgres
