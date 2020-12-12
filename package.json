@@ -6,7 +6,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node server.js",
-    "test": "node ace test",
+    "test": "nyc --reporter=lcov --reporter=text node ace test",
     "format": "prettier --write \"./**/*.{js,json,html,scss}\""
   },
   "keywords": [
@@ -37,6 +37,7 @@
     "endOfLine": "lf"
   },
   "devDependencies": {
+    "nyc": "^15.1.0",
     "prettier": "^2.2.1"
   }
 }
