@@ -6,7 +6,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node server.js",
-    "test": "nyc --reporter=lcov --reporter=text node ace test",
+    "test": "ENV_SILENT=true nyc --reporter=lcov --reporter=text node ace test",
     "format": "prettier --write \"./**/*.{js,json,html,scss}\""
   },
   "keywords": [
