@@ -45,7 +45,8 @@ jobs:
           ENV_PATH: ./.env.testing
 
       - name: Code Climate Test Reporter
+        run: GIT_BRANCH=$GITHUB_REF GIT_COMMIT_SHA=$GITHUB_SHA
         uses: aktions/codeclimate-test-reporter@v1
         with:
           codeclimate-test-reporter-id: ${{ secrets.CC_TEST_REPORTER_ID }}
-          command: GIT_BRANCH=$GITHUB_REF GIT_COMMIT_SHA=$GITHUB_SHA after-build -t lcov ./coverage/lcov.info
+          command: after-build -t lcov ./coverage/lcov.info
