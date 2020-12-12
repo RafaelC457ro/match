@@ -41,11 +41,6 @@ jobs:
         uses: paambaati/codeclimate-action@v2.7.5
         env:
           CC_TEST_REPORTER_ID: 2b97afdf04103afa1788a6ef7cb9b10878c0c14bbf1b278721042eac7e5516fb
-        with:
-          coverageCommand: npm test
-          coverageLocations: |
-            ${{github.workspace}}/*.lcov:lcov
-        env:
           # The hostname used to communicate with the PostgreSQL service container
           POSTGRES_HOST: postgres
           # The default PostgreSQL port
@@ -53,3 +48,7 @@ jobs:
           POSTGRES_DB: project_test
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
+        with:
+          coverageCommand: npm test
+          coverageLocations: |
+            ${{github.workspace}}/*.lcov:lcov
