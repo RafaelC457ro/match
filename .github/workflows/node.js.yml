@@ -6,6 +6,9 @@ jobs:
   container-job:
     # Containers must run in Linux based operating systems
     runs-on: ubuntu-latest
+    # Docker Hub image that `container-job` executes in
+    container: node:10.18-jessie
+
     # Service containers to run with `container-job`
     services:
       # Label used to access the service container
@@ -28,12 +31,11 @@ jobs:
 
     steps:
       # Downloads a copy of the code in your repository before running CI tests
-      - uses: actions/checkout@master
-      - uses: actions/setup-node@master
+      - name: Check out repository code
+        uses: actions/checkout@v2
 
-      with:
-        node-version: '12'
-
+      # Performs a clean installation of all dependencies in the `package.json` file
+      # For more information, see https://docs.npmjs.com/cli/ci.html
       - name: Install dependencies
         run: npm i
 
@@ -43,6 +45,6 @@ jobs:
           ENV_PATH: ./.env.testing
           CC_TEST_REPORTER_ID: 2b97afdf04103afa1788a6ef7cb9b10878c0c14bbf1b278721042eac7e5516fb
         with:
-          coverageCommand: npm run test
+          coverageCommand: npm test
           coverageLocations: |
             ${{github.workspace}}/*.lcov:lcov
