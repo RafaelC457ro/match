@@ -40,6 +40,7 @@ jobs:
         run: npm i
 
       - name: Test & publish code coverage
+        uses: @actions/glob
         uses: paambaati/codeclimate-action@v2.7.5
         env:
           ENV_PATH: ./.env.testing
