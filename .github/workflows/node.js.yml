@@ -41,6 +41,8 @@ jobs:
 
       - name: test
         run: npm test
+        env:
+          ENV_PATH: ./.env.testing
 
       - name: Code Climate Test Reporter
         uses: aktions/codeclimate-test-reporter@v1
