@@ -16,6 +16,8 @@ jobs:
         # Docker Hub image
         image: postgres
         # Provide the password for postgres
+        ports:
+          - 5432:5432
         env:
           POSTGRES_DB: project_test
           POSTGRES_USER: postgres
