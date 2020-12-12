@@ -45,8 +45,6 @@ jobs:
           ENV_PATH: ./.env.testing
 
       - name: Code Climate Test Reporter
-        uses: actions/checkout@master
-        uses: actions/setup-node@master
         uses: paambaati/codeclimate-action@v2.2.4
         env:
           CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
