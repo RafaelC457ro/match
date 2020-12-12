@@ -40,20 +40,16 @@ jobs:
         run: npm i
 
       - name: test
-        run: GIT_BRANCH=$GITHUB_REF GIT_COMMIT_SHA=$GITHUB_SHA GIT_COMMITTED_AT='$(date +%s)' npm test
+        run: npm test
         env:
           ENV_PATH: ./.env.testing
 
       - name: Code Climate Test Reporter
-      - uses: actions/checkout@master
-      - uses: actions/setup-node@master
-        with:
-          node-version: '12'
-      - run: npm install -g yarn
-      - run: yarn install
-      - run: yarn build
-      - uses: paambaati/codeclimate-action@v2.2.4
-        env:
-          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
-        with:
-          coverageCommand: npm test
+        - uses: actions/checkout@master
+        - uses: actions/setup-node@master
+          run: GIT_BRANCH=$GITHUB_REF GIT_COMMIT_SHA=$GITHUB_SHA GIT_COMMITTED_AT='$(date +%s)'
+        - uses: paambaati/codeclimate-action@v2.2.4
+          env:
+            CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
+          with:
+            coverageCommand: npm test
