@@ -8,9 +8,6 @@ jobs:
           ENV_PATH: ./.env.testing
 
       - image: circleci/postgres:9.6.2-alpine
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD # context / project UI env-var reference
         environment:
           POSTGRES_DB: project_test
           POSTGRES_USER: postgres
