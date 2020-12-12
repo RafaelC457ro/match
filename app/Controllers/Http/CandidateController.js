@@ -3,8 +3,8 @@
 const Candidate = use('App/Models/Candidate')
 
 class CandidateController {
-  async index({ response, request }) {
-    return await Candidate.all()
+  async index() {
+    return await Candidate.query().with('technologies').fetch()
   }
 }
 

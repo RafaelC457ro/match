@@ -5,7 +5,11 @@ const Model = use('Model')
 
 class Candidate extends Model {
   static get visible() {
-    return ['id', 'name', 'city']
+    return ['id', 'name', 'city', 'start_experience', 'end_experience']
+  }
+
+  technologies() {
+    return this.hasMany('App/Models/Technology')
   }
 }
 
