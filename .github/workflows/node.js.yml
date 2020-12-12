@@ -40,7 +40,7 @@ jobs:
         run: npm i
 
       - name: test
-        run: GIT_BRANCH=$GITHUB_REF GIT_COMMIT_SHA=$GITHUB_SHA npm test
+        run: GIT_BRANCH=$GITHUB_REF GIT_COMMIT_SHA=$GITHUB_SHA GIT_COMMITTED_AT='$(date +%s)' npm test
         env:
           ENV_PATH: ./.env.testing
 
