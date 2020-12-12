@@ -1,0 +1,42 @@
+{
+  "name": "geek-match",
+  "version": "4.1.0",
+  "adonis-version": "4.1.0",
+  "description": "GeekHunter challanger",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "node ace test",
+    "format": "prettier --write \"./**/*.{js,json,html,scss}\""
+  },
+  "keywords": [
+    "adonisjs",
+    "adonis-app"
+  ],
+  "author": "Rafael Castro<rccastrorafael@gmail.com>",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "@adonisjs/ace": "^5.0.8",
+    "@adonisjs/fold": "^4.0.9",
+    "@adonisjs/framework": "^5.0.9",
+    "@adonisjs/ignitor": "^2.0.8",
+    "@adonisjs/lucid": "^6.2.1",
+    "@adonisjs/vow": "^1.0.17",
+    "pg": "^8.5.1"
+  },
+  "autoload": {
+    "App": "./app"
+  },
+  "prettier": {
+    "singleQuote": true,
+    "trailingComma": "none",
+    "bracketSpacing": true,
+    "semi": false,
+    "printWidth": 80,
+    "endOfLine": "lf"
+  },
+  "devDependencies": {
+    "prettier": "^2.2.1"
+  }
+}
