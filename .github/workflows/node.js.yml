@@ -2,14 +2,10 @@ name: Test with Postgres
 on: push
 
 jobs:
-  # Label of the container job
-  container-job:
-    # Containers must run in Linux based operating systems
+  build:
+    # The type of runner that the job will run on
     runs-on: ubuntu-latest
-    # Docker Hub image that `container-job` executes in
-    container: node:10.18-jessie
 
-    # Service containers to run with `container-job`
     services:
       # Label used to access the service container
       postgres:
@@ -30,19 +26,24 @@ jobs:
           --health-retries 5
 
     steps:
-      # Downloads a copy of the code in your repository before running CI tests
-      - name: Check out repository code
-        uses: actions/checkout@v2
-
-      # Performs a clean installation of all dependencies in the `package.json` file
-      # For more information, see https://docs.npmjs.com/cli/ci.html
-      - name: Install dependencies
+      - uses: actions/checkout@v2
+      - name: Use Node.js 12.13.1
+        uses: actions/setup-node@v1
+        with:
+          node-version: '12.13.1'
+      - name: npm install
         run: npm i
-
-      - name: Code Climate Test Reporter
+      - name: npm build
+        run: npm run build
+      - name: npm test
+        run: npm test
+      - name: Code Climate Coverage Action
+        # You may pin to the exact commit or the version.
+        # uses: paambaati/codeclimate-action@738fb8ce9bd3dda56152c27bd729624b4ebd9935
         uses: paambaati/codeclimate-action@v2.7.5
         env:
-          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
-          ENV_PATH: ./.env.testing
+          # Set CC_TEST_REPORTER_ID as secret of your repo
+          CC_TEST_REPORTER_ID: ${{secrets.CC_TEST_REPORTER_ID}}
         with:
-          coverageCommand: npm test
+          coverageCommand: npm run test
+          debug: true
