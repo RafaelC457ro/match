@@ -47,7 +47,6 @@ jobs:
       - name: Code Climate Test Reporter
         - uses: actions/checkout@master
         - uses: actions/setup-node@master
-          run: GIT_BRANCH=$GITHUB_REF GIT_COMMIT_SHA=$GITHUB_SHA GIT_COMMITTED_AT='$(date +%s)'
         - uses: paambaati/codeclimate-action@v2.2.4
           env:
             CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
