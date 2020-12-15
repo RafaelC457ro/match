@@ -29,6 +29,18 @@ class CandidateController {
         .where('end_experience', '<=', data.betweenEnd)
     }
 
+    if (data.greaterThen) {
+      query.where('start_experience', '>', data.greaterThen)
+    }
+
+    if (data.technologies) {
+      query.whereExists(function () {
+        this.from('technologies')
+          .whereRaw('candidates.id = technologies.candidate_id')
+          .whereIn('technologies.name', data.technologies)
+      })
+    }
+
     const candidates = await query.with('technologies').fetch()
 
     return { candidates }
