@@ -16,4 +16,6 @@
 /** @type {typeof import('@adonisjs/framework/src/Route/Manager')} */
 const Route = use('Route')
 
-Route.get('/candidates', 'CandidateController.index')
+Route.group(() => {
+  Route.get('/candidates', 'CandidateController.index')
+}).prefix('api/v1')
