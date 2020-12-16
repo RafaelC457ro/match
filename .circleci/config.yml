@@ -41,8 +41,8 @@ jobs:
             # download test reporter as a static binary
             curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
             chmod +x ./cc-test-reporter
-            ./cc-test-reporter format-coverage -t lcov -o tmp/codeclimate.frontend.json coverage/front/lcov.info
-            ./cc-test-reporter format-coverage -t lcov -o tmp/codeclimate.backend.json coverage/back/lcov.info
+            ./cc-test-reporter format-coverage -t lcov -o codeclimate.frontend.json coverage/front/lcov.info
+            ./cc-test-reporter format-coverage -t lcov -o codeclimate.backend.json coverage/back/lcov.info
           when: always
       - run:
           name: Send coverage report to Code Climate
@@ -50,10 +50,6 @@ jobs:
             # nyc report requires that nyc has already been run,
             # which creates the .nyc_output folder containing necessary data
             |
-            ./tmp/cc-test-reporter sum-coverage codeclimate.*.json -p 2 -o codeclimate.total.json
-            ./tmp/cc-test-reporter upload-coverage -i codeclimate.total.json
+            ./cc-test-reporter sum-coverage codeclimate.*.json -p 2 -o codeclimate.total.json
+            ./cc-test-reporter upload-coverage -i codeclimate.total.json
           when: always
-      # Upload results
-      - store_artifacts: # upload test coverage as artifact
-          path: ./coverage/back/lcov.info
-          prefix: tests
