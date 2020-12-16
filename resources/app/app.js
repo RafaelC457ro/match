@@ -12,6 +12,8 @@ const GlobalStyle = createGlobalStyle`
 
 // local
 import Header from './components/Header/Header'
+import SearchCities from './components/SearchCities/SearchCities'
+import SearchLangs from './components/SearchLangs/SearchLangs'
 
 const Container = styled.div``
 
@@ -20,6 +22,8 @@ const App = () => (
     <GlobalStyle />
     <Container>
       <Header />
+      <SearchCities onChange={(newValue) => console.log(newValue)} />
+      <SearchLangs onChange={(newValue) => console.log(newValue)} />
     </Container>
   </>
 )
