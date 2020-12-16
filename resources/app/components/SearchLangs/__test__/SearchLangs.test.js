@@ -1,5 +1,4 @@
 import React from 'react'
-import axios from 'axios'
 import { render, screen, waitFor, fireEvent } from '@testing-library/react'
 import '@testing-library/jest-dom/extend-expect'
 
