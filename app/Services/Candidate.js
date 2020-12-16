@@ -27,6 +27,11 @@ class CandidateService {
 
   static async list(filter) {
     const query = Candidate.query()
+
+    if (filter.city) {
+      query.whereIn('city', filter.city)
+    }
+
     if (filter.betweenStart && filter.betweenEnd) {
       query
         .where('start_experience', '>=', filter.betweenStart)

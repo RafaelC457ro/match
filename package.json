@@ -7,9 +7,9 @@
   "scripts": {
     "start": "node server.js",
     "adonis-coverage": "nyc --reporter=lcov --reporter=text --report-dir coverage/back node ace test",
-    "format": "prettier --write \"./**/*.{js,json,html,scss}\"",
+    "format": "prettier --write \"./**/*.{js,jsx,json,html,scss}\"",
     "web-serve": "webpack -w --mode=development",
-    "test-watch": "jest --watch",
+    "test-watch": "jest --watchAll",
     "jest-coverage": "jest --coverage",
     "test": "npm run adonis-coverage && npm run jest-coverage"
   },
@@ -38,7 +38,8 @@
     "pg": "^8.5.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
-    "styled-components": "^5.2.1"
+    "styled-components": "^5.2.1",
+    "styled-reset": "^4.3.3"
   },
   "autoload": {
     "App": "./app"
@@ -55,6 +56,8 @@
     "@babel/core": "^7.12.10",
     "@babel/preset-env": "^7.12.10",
     "@babel/preset-react": "^7.12.10",
+    "@testing-library/jest-dom": "^5.11.6",
+    "@testing-library/react": "^11.2.2",
     "babel-loader": "^8.2.2",
     "jest": "^26.6.3",
     "nyc": "^15.1.0",
@@ -64,7 +67,7 @@
   },
   "jest": {
     "testMatch": [
-      "<rootDir>/resources/**/*.test.js"
+      "<rootDir>/resources/app/**/*.test.js"
     ],
     "coverageDirectory": "<rootDir>/coverage/front",
     "moduleNameMapper": {

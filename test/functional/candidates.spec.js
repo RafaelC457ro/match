@@ -354,3 +354,65 @@ test('it should return a invalid technologies parameters', async ({
     ]
   })
 })
+
+test('it should filter candidates by city', async ({ client }) => {
+  for (const candidate of candidates) {
+    const {
+      id,
+      name,
+      city,
+      start_experience,
+      end_experience,
+      technologies
+    } = candidate
+    const newCaditate = await Candidate.create({
+      id,
+      name,
+      city,
+      start_experience,
+      end_experience
+    })
+
+    for (const technology of technologies) {
+      const newTechs = new Technology()
+      newTechs.fill(technology)
+      await newCaditate.technologies().save(newTechs)
+    }
+  }
+
+  const response = await client
+    .get('api/v1/candidates?city[]=Florianópolis - SC')
+    .end()
+
+  response.assertStatus(200)
+  response.assertJSON({
+    candidates: [
+      {
+        id: 1,
+        name: 'João das Neves',
+        city: 'Florianópolis - SC',
+        start_experience: 1,
+        end_experience: 2,
+        technologies: [
+          {
+            name: 'Javacript',
+            is_main_tech: true
+          }
+        ]
+      },
+      {
+        id: 3,
+        name: 'Vitor Carvalho',
+        city: 'Florianópolis - SC',
+        start_experience: 2,
+        end_experience: 4,
+        technologies: [
+          {
+            name: 'Elixir',
+            is_main_tech: true
+          }
+        ]
+      }
+    ]
+  })
+})

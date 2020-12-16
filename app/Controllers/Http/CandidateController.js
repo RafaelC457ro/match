@@ -10,7 +10,8 @@ class CandidateController {
       'betweenStart',
       'betweenEnd',
       'greaterThen',
-      'technologies'
+      'technologies',
+      'city'
     ])
     const validation = await validate(
       data,

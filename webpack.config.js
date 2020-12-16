@@ -1,10 +1,9 @@
 function scriptRules() {
   return [
     {
-      test: /\.js$/,
+      test: /\.(js|jsx)$/,
       exclude: [/node_modules/],
-      loader: 'babel-loader',
-      options: { presets: ['@babel/env', '@babel/preset-react'] }
+      loader: 'babel-loader'
     }
   ]
 }

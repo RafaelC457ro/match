@@ -6,7 +6,8 @@ class Candidate {
       betweenStart: 'number|above:0',
       betweenEnd: 'number|above:1',
       greaterThen: 'number|above:0',
-      technologies: 'array|min:1'
+      technologies: 'array|min:1',
+      city: 'array|min:1'
     }
   }
 
@@ -18,7 +19,8 @@ class Candidate {
       'betweenEnd.above': 'You must provide a number above 1.',
       'greaterThen.number': 'You must provide a number.',
       'greaterThen.above': 'You must provide a number above 1.',
-      'technologies.array': 'You must provide a list of technologies.'
+      'technologies.array': 'You must provide a list of technologies.',
+      'city.array': 'You must provide a list of cites.'
     }
   }
 }
