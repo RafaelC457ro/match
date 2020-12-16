@@ -33,6 +33,7 @@
     "@adonisjs/shield": "^1.0.8",
     "@adonisjs/validator": "^5.0.6",
     "@adonisjs/vow": "^1.0.17",
+    "babel-jest": "^26.6.3",
     "got": "^11.8.1",
     "pg": "^8.5.1",
     "react": "^17.0.1",
