@@ -37,12 +37,14 @@ jobs:
 
       - run:
           name: Setup Code Climate test-reporter
+           - attach_workspace:
+          at: ~/repo/
           command: |
             # download test reporter as a static binary
             curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
             chmod +x ./cc-test-reporter
-            ./cc-test-reporter format-coverage -t lcov -o codeclimate.frontend.json ~/repo/coverage/front/lcov.info
-            ./cc-test-reporter format-coverage -t lcov -o codeclimate.backend.json ~/repo/coverage/back/lcov.info
+            ./cc-test-reporter format-coverage -t lcov -o codeclimate.frontend.json coverage/front/lcov.info --debug
+            ./cc-test-reporter format-coverage -t lcov -o codeclimate.backend.json coverage/back/lcov.info --debug
           when: always
       - run:
           name: Send coverage report to Code Climate
