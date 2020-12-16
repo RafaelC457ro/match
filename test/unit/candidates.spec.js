@@ -24,7 +24,7 @@ test('it should parse experience [range]', async ({ assert }) => {
   assert.deepEqual(parsed, expected)
 })
 
-test('it should parse invalid]', async ({ assert }) => {
+test('it should parse invalid', async ({ assert }) => {
   const experience = ''
 
   const expected = null

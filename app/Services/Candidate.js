@@ -1,6 +1,6 @@
 'use strict'
-
-class Candidate {
+const Candidate = use('App/Models/Candidate')
+class CandidateService {
   static parseExperience(experience) {
     const regexGreater = /(?<start>[0-9]+)\+\syears/
     const startEndRegex = /(?<start>[0-9]+)\-(?<end>[0-9]+)\syears/
@@ -24,6 +24,31 @@ class Candidate {
 
     return null
   }
+
+  static async list(filter) {
+    const query = Candidate.query()
+    if (filter.betweenStart && filter.betweenEnd) {
+      query
+        .where('start_experience', '>=', filter.betweenStart)
+        .where('end_experience', '<=', filter.betweenEnd)
+    }
+
+    if (filter.greaterThen) {
+      query.where('start_experience', '>', filter.greaterThen)
+    }
+
+    if (filter.technologies) {
+      query.whereExists(function () {
+        this.from('technologies')
+          .whereRaw('candidates.id = technologies.candidate_id')
+          .whereIn('technologies.name', filter.technologies)
+      })
+    }
+
+    const candidates = await query.with('technologies').fetch()
+
+    return { candidates }
+  }
 }
 
-module.exports = Candidate
+module.exports = CandidateService

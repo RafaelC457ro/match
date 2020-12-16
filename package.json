@@ -2,12 +2,16 @@
   "name": "geek-match",
   "version": "4.1.0",
   "adonis-version": "4.1.0",
-  "description": "GeekHunter challanger",
+  "description": "GeekHunter challenge",
   "main": "index.js",
   "scripts": {
     "start": "node server.js",
-    "test": "nyc --reporter=lcov --reporter=text node ace test",
-    "format": "prettier --write \"./**/*.{js,json,html,scss}\""
+    "adonis-coverage": "nyc --reporter=lcov --reporter=text --report-dir coverage/back node ace test",
+    "format": "prettier --write \"./**/*.{js,json,html,scss}\"",
+    "web-serve": "webpack -w --mode=development",
+    "test-watch": "jest --watch",
+    "jest-coverage": "jest --coverage",
+    "test": "npm run adonis-coverage && npm run jest-coverage"
   },
   "keywords": [
     "adonisjs",
@@ -18,14 +22,22 @@
   "private": true,
   "dependencies": {
     "@adonisjs/ace": "^5.0.8",
+    "@adonisjs/auth": "^3.0.7",
+    "@adonisjs/bodyparser": "^2.0.5",
+    "@adonisjs/cors": "^1.0.7",
     "@adonisjs/fold": "^4.0.9",
     "@adonisjs/framework": "^5.0.9",
     "@adonisjs/ignitor": "^2.0.8",
-    "@adonisjs/lucid": "^6.2.1",
+    "@adonisjs/lucid": "^6.1.3",
+    "@adonisjs/session": "^1.0.27",
+    "@adonisjs/shield": "^1.0.8",
     "@adonisjs/validator": "^5.0.6",
     "@adonisjs/vow": "^1.0.17",
     "got": "^11.8.1",
-    "pg": "^8.5.1"
+    "pg": "^8.5.1",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "styled-components": "^5.2.1"
   },
   "autoload": {
     "App": "./app"
@@ -39,7 +51,32 @@
     "endOfLine": "lf"
   },
   "devDependencies": {
+    "@babel/core": "^7.12.10",
+    "@babel/preset-env": "^7.12.10",
+    "@babel/preset-react": "^7.12.10",
+    "babel-loader": "^8.2.2",
+    "jest": "^26.6.3",
     "nyc": "^15.1.0",
-    "prettier": "^2.2.1"
+    "prettier": "^2.2.1",
+    "webpack": "^5.10.3",
+    "webpack-cli": "^4.2.0"
+  },
+  "jest": {
+    "testMatch": [
+      "<rootDir>/resources/**/*.test.js"
+    ],
+    "coverageDirectory": "<rootDir>/coverage/front",
+    "moduleNameMapper": {
+      "\\.(css|less)$": "identity-obj-proxy",
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/resources/app/test/__mocks__/fileMock.js"
+    },
+    "coverageThreshold": {
+      "global": {
+        "branches": 100,
+        "functions": 100,
+        "lines": 100,
+        "statements": 100
+      }
+    }
   }
 }

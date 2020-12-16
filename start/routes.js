@@ -19,3 +19,5 @@ const Route = use('Route')
 Route.group(() => {
   Route.get('/candidates', 'CandidateController.index')
 }).prefix('api/v1')
+
+Route.on('/').render('home')
