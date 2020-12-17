@@ -5,13 +5,15 @@
   "description": "GeekHunter challenge",
   "main": "index.js",
   "scripts": {
-    "start": "node server.js",
     "adonis-coverage": "nyc --reporter=lcov --reporter=text --report-dir coverage/back node ace test",
     "format": "prettier --write \"./**/*.{js,jsx,json,html,scss}\"",
     "web-serve": "webpack -w --mode=development",
     "test-watch": "jest --watchAll",
     "jest-coverage": "jest --coverage",
-    "test": "npm run adonis-coverage && npm run jest-coverage"
+    "test": "npm run adonis-coverage && npm run jest-coverage",
+    "start": "ENV_SILENT=true node server.js",
+    "migrate": "ENV_SILENT=true node ace migration:run --force",
+    "seed": "ENV_SILENT=true node ace seed"
   },
   "keywords": [
     "adonisjs",
