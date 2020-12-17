@@ -151,6 +151,71 @@ test('it should filter candidates by experience years', async ({ client }) => {
   })
 })
 
+test('it should filter candidates by experience years more then zero', async ({
+  client
+}) => {
+  for (const candidate of candidates) {
+    const {
+      id,
+      name,
+      city,
+      start_experience,
+      end_experience,
+      technologies
+    } = candidate
+    const newCaditate = await Candidate.create({
+      id,
+      name,
+      city,
+      start_experience,
+      end_experience
+    })
+
+    for (const technology of technologies) {
+      const newTechs = new Technology()
+      newTechs.fill(technology)
+      await newCaditate.technologies().save(newTechs)
+    }
+  }
+
+  const response = await client
+    .get('api/v1/candidates')
+    .query({ betweenStart: 0, betweenEnd: 2 })
+    .end()
+
+  response.assertStatus(200)
+  response.assertJSON({
+    candidates: [
+      {
+        id: 1,
+        name: 'João das Neves',
+        city: 'Florianópolis - SC',
+        start_experience: 1,
+        end_experience: 2,
+        technologies: [
+          {
+            name: 'Javacript',
+            is_main_tech: true
+          }
+        ]
+      },
+      {
+        id: 4,
+        name: 'Jefferson Almeida',
+        city: 'São Paulo - SP',
+        start_experience: 1,
+        end_experience: 2,
+        technologies: [
+          {
+            name: 'C#',
+            is_main_tech: true
+          }
+        ]
+      }
+    ]
+  })
+})
+
 test('it should return a invalid between parameters', async ({ client }) => {
   const response = await client
     .get('api/v1/candidates')
@@ -204,6 +269,99 @@ test('it should filter candidates by experience greater then some year', async (
   response.assertStatus(200)
   response.assertJSON({
     candidates: [
+      {
+        id: 2,
+        name: 'Pedro Paiva',
+        city: 'Tubarão - SC',
+        start_experience: 15,
+        end_experience: null,
+        technologies: [
+          {
+            name: 'Python',
+            is_main_tech: true
+          }
+        ]
+      }
+    ]
+  })
+})
+
+test('it should filter candidates by experience years more then zero using greaterThen', async ({
+  client
+}) => {
+  const candidatestest = [
+    {
+      id: 1,
+      name: 'João das Neves',
+      city: 'Florianópolis - SC',
+      start_experience: 1,
+      end_experience: 2,
+      technologies: [
+        {
+          name: 'Javacript',
+          is_main_tech: true
+        }
+      ]
+    },
+    {
+      id: 2,
+      name: 'Pedro Paiva',
+      city: 'Tubarão - SC',
+      start_experience: 15,
+      end_experience: null,
+      technologies: [
+        {
+          name: 'Python',
+          is_main_tech: true
+        }
+      ]
+    }
+  ]
+  for (const candidate of candidatestest) {
+    const {
+      id,
+      name,
+      city,
+      start_experience,
+      end_experience,
+      technologies
+    } = candidate
+    const newCaditate = await Candidate.create({
+      id,
+      name,
+      city,
+      start_experience,
+      end_experience
+    })
+
+    for (const technology of technologies) {
+      const newTechs = new Technology()
+      newTechs.fill(technology)
+      await newCaditate.technologies().save(newTechs)
+    }
+  }
+
+  const response = await client
+    .get('api/v1/candidates')
+    .query({ greaterThen: 0 })
+    .end()
+
+  response.assertStatus(200)
+  response.assertJSON({
+    candidates: [
+      {
+        id: 1,
+        name: 'João das Neves',
+        city: 'Florianópolis - SC',
+        start_experience: 1,
+        end_experience: 2,
+        technologies: [
+          {
+            name: 'Javacript',
+            is_main_tech: true
+          }
+        ]
+      },
       {
         id: 2,
         name: 'Pedro Paiva',
@@ -409,6 +567,82 @@ test('it should filter candidates by city', async ({ client }) => {
         technologies: [
           {
             name: 'Elixir',
+            is_main_tech: true
+          }
+        ]
+      }
+    ]
+  })
+})
+
+test('it should filter candidates by city', async ({ client }) => {
+  for (const candidate of candidates) {
+    const {
+      id,
+      name,
+      city,
+      start_experience,
+      end_experience,
+      technologies
+    } = candidate
+    const newCaditate = await Candidate.create({
+      id,
+      name,
+      city,
+      start_experience,
+      end_experience
+    })
+
+    for (const technology of technologies) {
+      const newTechs = new Technology()
+      newTechs.fill(technology)
+      await newCaditate.technologies().save(newTechs)
+    }
+  }
+
+  const response = await client
+
+    .get('api/v1/candidates?city[]=Florianópolis - SC&city[]=São Paulo - SP')
+    .end()
+
+  response.assertStatus(200)
+  response.assertJSON({
+    candidates: [
+      {
+        id: 1,
+        name: 'João das Neves',
+        city: 'Florianópolis - SC',
+        start_experience: 1,
+        end_experience: 2,
+        technologies: [
+          {
+            name: 'Javacript',
+            is_main_tech: true
+          }
+        ]
+      },
+      {
+        id: 3,
+        name: 'Vitor Carvalho',
+        city: 'Florianópolis - SC',
+        start_experience: 2,
+        end_experience: 4,
+        technologies: [
+          {
+            name: 'Elixir',
+            is_main_tech: true
+          }
+        ]
+      },
+      {
+        id: 4,
+        name: 'Jefferson Almeida',
+        city: 'São Paulo - SP',
+        start_experience: 1,
+        end_experience: 2,
+        technologies: [
+          {
+            name: 'C#',
             is_main_tech: true
           }
         ]

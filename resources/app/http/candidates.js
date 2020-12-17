@@ -3,7 +3,7 @@ import axios from 'axios'
 export const getCandidates = async (filter) => {
   console.log(filter)
   const { cities, experience, technologies } = filter
-  const city = cities ? `city[]=${cities.join(',')}` : ''
+  const city = cities ? `city[]=${cities.join('&city[]=')}` : ''
   const techs = technologies ? `&technologies[]=${cities.join(',')}` : ''
 
   let exp = ''

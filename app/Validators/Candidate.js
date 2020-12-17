@@ -3,9 +3,9 @@
 class Candidate {
   static get rules() {
     return {
-      betweenStart: 'number|above:0',
+      betweenStart: 'number|above:-1',
       betweenEnd: 'number|above:1',
-      greaterThen: 'number|above:0',
+      greaterThen: 'number|above:-1',
       technologies: 'array|min:1',
       city: 'array|min:1'
     }
