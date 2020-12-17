@@ -13,7 +13,7 @@
     "test": "npm run adonis-coverage && npm run jest-coverage",
     "start": "ENV_SILENT=true node server.js",
     "migrate": "ENV_SILENT=true node ace migration:run --force",
-    "seed": "ENV_SILENT=true node ace seed"
+    "seed": "ENV_SILENT=true node ace seed --force"
   },
   "keywords": [
     "adonisjs",
