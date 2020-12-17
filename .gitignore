@@ -15,4 +15,4 @@ database/development.sqlite
 .nyc_output
 coverage
 
-/public/*
+public/*
