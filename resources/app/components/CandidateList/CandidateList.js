@@ -14,12 +14,12 @@ const columns = [
     headerName: 'Cidade'
   },
   {
-    field: 'languages',
-    headerName: 'Tecnologias'
-  },
-  {
     field: 'experience',
     headerName: 'Experiência'
+  },
+  {
+    field: 'languages',
+    headerName: 'Tecnologias'
   }
 ]
 
