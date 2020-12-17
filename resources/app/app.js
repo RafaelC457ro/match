@@ -73,10 +73,8 @@ const App = () => {
 
   const handleSearch = async () => {
     await getData({
-      cities: cities.cities.lenght ? cities.cities : null,
-      technologies: technologies.languages.lenght
-        ? technologies.language
-        : null,
+      cities: cities.cities ? cities.cities : null,
+      technologies: technologies.languages ? technologies.language : null,
       experience
     })
   }
