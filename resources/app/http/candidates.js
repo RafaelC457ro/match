@@ -4,7 +4,7 @@ export const getCandidates = async (filter) => {
   console.log(filter)
   const { cities, experience, technologies } = filter
   const city = cities ? `city[]=${cities.join('&city[]=')}` : ''
-  const techs = technologies ? `&technologies[]=${cities.join(',')}` : ''
+  const techs = technologies ? `&technologies[]=${cities.join('&technologies[]=')}` : ''
 
   let exp = ''
   if (experience) {
